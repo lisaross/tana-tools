@@ -1,0 +1,1 @@
+- When building Toasts for Raycast extensions, the notification must go in the title field for the user as message only shows in the console
