@@ -199,7 +199,8 @@ export function formatTranscriptFieldWithSiblings(
     return [];
   }
 
-  const fieldName = transcriptField || "Transcript";
+  // Sanitize field name by trimming whitespace and removing trailing colons
+  const fieldName = (transcriptField || "Transcript").trim().replace(/:+$/, "");
   const lines: string[] = [`  - ${fieldName}::`];
 
   // Add each chunk as a child under the Transcript:: field
