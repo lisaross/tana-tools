@@ -296,17 +296,17 @@ export default function Command() {
               ...(tab.active ? [{ text: "Active" }] : []),
               { text: domain },
             ]}
-          icon={tab.active ? "✅" : "🌐"}
-          actions={
-            <ActionPanel>
-              <Action
-                title="Extract Content to Tana"
-                onAction={() => processTab(tab)}
-              />
-              <Action.OpenInBrowser title="Open in Browser" url={tab.url} />
-              <Action.CopyToClipboard title="Copy URL" content={tab.url} />
-            </ActionPanel>
-          }
+            icon={tab.active ? "✅" : "🌐"}
+            actions={
+              <ActionPanel>
+                <Action
+                  title="Extract Content to Tana"
+                  onAction={() => processTab(tab)}
+                />
+                <Action.OpenInBrowser title="Open in Browser" url={tab.url} />
+                <Action.CopyToClipboard title="Copy URL" content={tab.url} />
+              </ActionPanel>
+            }
           />
         );
       })}
