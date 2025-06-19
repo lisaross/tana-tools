@@ -1,6 +1,6 @@
-# Tana Tools for Raycast
+# Tana Tools
 
-🚀 **Instantly convert web pages, YouTube videos, and text (including Markdown) to Tana Paste format from Raycast**
+🚀 **Instantly convert web pages (mostly), YouTube videos, and text (including Markdown) to Tana Paste format from Raycast**
 
 Transform any content into Tana's structured format with just a few keystrokes. Perfect for knowledge workers, researchers, and anyone building their second brain in Tana.
 
@@ -46,7 +46,7 @@ Transform any content into Tana's structured format with just a few keystrokes. 
 - **Custom Tags**: Set your own supertags for videos, articles, transcripts, and notes
 - **Field Names**: Customize field names (URL, Author, Transcript, Content) to match your Tana setup
 - **Content Control**: Toggle whether to include author and description fields
-- **Perfect Integration**: Make the output fit seamlessly into your existing Tana workflow
+- **Workflow Integration**: Make the output fit into your existing Tana workflow or use defaults
 
 ![Configuration for custom Tana workflows and tags](docs/images/01-Configuration-for-custom-tana-workflows-and-tags.png)
 

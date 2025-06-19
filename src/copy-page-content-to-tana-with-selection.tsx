@@ -285,28 +285,31 @@ export default function Command() {
           </ActionPanel>
         }
       />
-      {tabs.map((tab) => (
-        <List.Item
-          key={tab.id}
-          title={tab.title}
-          subtitle={getDomainFromUrl(tab.url)}
-          accessories={[
-            ...(tab.active ? [{ text: "Active" }] : []),
-            { text: getDomainFromUrl(tab.url) },
-          ]}
-          icon={tab.active ? "✅" : "🌐"}
-          actions={
-            <ActionPanel>
-              <Action
-                title="Extract Content to Tana"
-                onAction={() => processTab(tab)}
-              />
-              <Action.OpenInBrowser title="Open in Browser" url={tab.url} />
-              <Action.CopyToClipboard title="Copy URL" content={tab.url} />
-            </ActionPanel>
-          }
-        />
-      ))}
+      {tabs.map((tab) => {
+        const domain = getDomainFromUrl(tab.url);
+        return (
+          <List.Item
+            key={tab.id}
+            title={tab.title}
+            subtitle={domain}
+            accessories={[
+              ...(tab.active ? [{ text: "Active" }] : []),
+              { text: domain },
+            ]}
+            icon={tab.active ? "✅" : "🌐"}
+            actions={
+              <ActionPanel>
+                <Action
+                  title="Extract Content to Tana"
+                  onAction={() => processTab(tab)}
+                />
+                <Action.OpenInBrowser title="Open in Browser" url={tab.url} />
+                <Action.CopyToClipboard title="Copy URL" content={tab.url} />
+              </ActionPanel>
+            }
+          />
+        );
+      })}
     </List>
   );
 }

@@ -475,6 +475,11 @@ export async function extractMainContent(
               return true;
             }
 
+            // Filter out all javascript: protocol links
+            if (href.toLowerCase().startsWith("javascript:")) {
+              return true;
+            }
+
             // Filter out generic "close" links
             if (text.toLowerCase() === "close" && href.includes("javascript")) {
               return true;

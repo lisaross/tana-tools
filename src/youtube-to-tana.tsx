@@ -1008,6 +1008,20 @@ async function extractCleanTranscript(tabId: number): Promise<string | null> {
   }
 }
 
+// Regex patterns for cleaning transcript text
+const TIMESTAMP_PATTERNS = {
+  // Remove timestamp patterns like "0:00", "1:23", "12:34:56" with surrounding spaces
+  TIME_FORMAT: /\s*\b\d{1,2}:\d{2}(?::\d{2})?\b\s*/g,
+  // Remove decimal timestamps like "0.5", "12.34"
+  DECIMAL_TIME: /\s*\b\d+\.\d+\b\s*/g,
+  // Remove standalone numbers that might be timestamps (with word boundaries)
+  STANDALONE_NUMBERS: /\s+\b\d+\b\s+/g,
+  // Remove any remaining isolated numbers at start of lines
+  LINE_START_NUMBERS: /^\s*\d+\s+/gm,
+  // Remove multiple consecutive spaces
+  MULTIPLE_SPACES: /\s{2,}/g,
+};
+
 /**
  * Clean transcript text by removing timestamps and formatting properly
  */
@@ -1015,17 +1029,11 @@ function cleanTranscriptText(rawText: string): string {
   if (!rawText) return "";
 
   const cleanedText = rawText
-    // Remove timestamp patterns like "0:00", "1:23", "12:34:56" with surrounding spaces
-    .replace(/\s*\b\d{1,2}:\d{2}(?::\d{2})?\b\s*/g, " ")
-    // Remove decimal timestamps like "0.5", "12.34"
-    .replace(/\s*\b\d+\.\d+\b\s*/g, " ")
-    // Remove standalone numbers that might be timestamps (with word boundaries)
-    .replace(/\s+\b\d+\b\s+/g, " ")
-    // Remove any remaining isolated numbers at start of lines
-    .replace(/^\s*\d+\s+/gm, "")
-    // Remove multiple consecutive spaces
-    .replace(/\s{2,}/g, " ")
-    // Remove extra whitespace and normalize
+    .replace(TIMESTAMP_PATTERNS.TIME_FORMAT, " ")
+    .replace(TIMESTAMP_PATTERNS.DECIMAL_TIME, " ")
+    .replace(TIMESTAMP_PATTERNS.STANDALONE_NUMBERS, " ")
+    .replace(TIMESTAMP_PATTERNS.LINE_START_NUMBERS, "")
+    .replace(TIMESTAMP_PATTERNS.MULTIPLE_SPACES, " ")
     .trim();
 
   return cleanedText;

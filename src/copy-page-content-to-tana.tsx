@@ -88,8 +88,7 @@ export default async function Command() {
     } catch (error) {
       console.error("Error opening Tana:", error);
       toast.style = Toast.Style.Success;
-      toast.title = "Success!";
-      toast.message = "Page content copied to clipboard (could not open Tana)";
+      toast.title = "Copied to clipboard! (Couldn't open Tana)";
     }
   } catch (error) {
     const errorMessage =
