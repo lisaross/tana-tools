@@ -27,30 +27,35 @@
     {
       "name": "quick-clipboard-to-tana",
       "title": "Quick Clipboard to Tana",
+      "subtitle": "Tana",
       "description": "Instantly convert clipboard content to Tana Paste format",
       "mode": "no-view"
     },
     {
       "name": "paste-and-edit",
       "title": "Paste and Edit for Tana",
+      "subtitle": "Tana",
       "description": "Paste text, edit it, then convert to Tana Paste format",
       "mode": "view"
     },
     {
       "name": "youtube-to-tana",
       "title": "Youtube to Tana",
+      "subtitle": "Tana",
       "description": "Extract YouTube video information from Chrome, Arc, or Safari and convert to Tana Paste format",
       "mode": "no-view"
     },
     {
       "name": "copy-page-content-to-tana",
       "title": "Copy Page Content to Tana",
+      "subtitle": "Tana",
       "description": "Extract all text from the current browser page and convert to Tana Paste format",
       "mode": "no-view"
     },
     {
       "name": "copy-page-content-to-tana-with-selection",
       "title": "Copy Page Content to Tana (select Tab)",
+      "subtitle": "Tana",
       "description": "Choose from available browser tabs and extract content to Tana Paste format",
       "mode": "view"
     }
