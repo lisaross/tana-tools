@@ -3,6 +3,8 @@
  * Determines what type of content we're dealing with for appropriate processing
  */
 
+import { isManualYouTubeTranscript } from "./youtube-transcript-cleaner";
+
 /**
  * Detect if text is a Limitless Pendant transcription
  * Format: > [Speaker](#startMs=timestamp&endMs=timestamp): Content
@@ -84,6 +86,7 @@ export type ContentType =
   | "limitless-pendant"
   | "limitless-app"
   | "youtube-transcript"
+  | "youtube-transcript-manual"
   | "youtube-video"
   | "browser-page"
   | "selected-text"
@@ -143,6 +146,11 @@ export function detectContentType(options: {
 
   if (rawContent && isYouTubeTranscript(rawContent)) {
     return "youtube-transcript";
+  }
+
+  // Check for manually pasted YouTube transcript (with timestamps)
+  if (rawContent && isManualYouTubeTranscript(rawContent)) {
+    return "youtube-transcript-manual";
   }
 
   if (isBrowserPageContent(options)) {

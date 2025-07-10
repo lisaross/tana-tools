@@ -11,6 +11,7 @@ import {
   processAndChunkTranscript,
   removeColonsInContent,
 } from "./content-processing";
+import { cleanYouTubeTranscript } from "./youtube-transcript-cleaner";
 import {
   formatMetadataFields,
   formatContentField,
@@ -74,6 +75,9 @@ export function formatForTana(options: TanaFormatOptions): string {
 
     case "youtube-transcript":
       return formatYouTubeTranscript(options);
+
+    case "youtube-transcript-manual":
+      return formatManualYouTubeTranscript(options);
 
     case "browser-page":
       return formatBrowserPageContent(options);
@@ -309,6 +313,47 @@ function formatSelectedTextContent(options: TanaFormatOptions): string {
     }
 
     lines.push(...formattedLines);
+  }
+
+  return lines.join("\n");
+}
+
+/**
+ * Format manually pasted YouTube transcript for Tana
+ *
+ * Cleans raw YouTube transcript by removing timestamps and formatting
+ * into 7000 character chunks suitable for Tana paste format.
+ *
+ * @param options - Formatting options containing raw transcript with timestamps
+ * @returns Formatted Tana Paste string with cleaned, chunked transcript
+ */
+function formatManualYouTubeTranscript(options: TanaFormatOptions): string {
+  const lines = ["%%tana%%"];
+
+  const rawContent =
+    options.content || (options.lines ? options.lines.join("\n") : "");
+
+  // Clean the transcript by removing timestamps
+  const cleanedTranscript = cleanYouTubeTranscript(rawContent);
+
+  // Chunk into 7000 character blocks to align with default chunk size
+  const chunks = processAndChunkTranscript(cleanedTranscript, 7000);
+
+  if (chunks.length > 0) {
+    // Apply transcript tag if provided
+    const transcriptTag = options.transcriptTag;
+    const tags = transcriptTag ? [transcriptTag] : [];
+
+    // Add chunks directly as top-level nodes
+    chunks.forEach((chunk, index) => {
+      if (index === 0 && tags.length > 0) {
+        // First chunk gets the tag
+        lines.push(`- ${chunk.content} #${tags[0]}`);
+      } else {
+        // Subsequent chunks are just content
+        lines.push(`- ${chunk.content}`);
+      }
+    });
   }
 
   return lines.join("\n");

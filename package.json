@@ -28,7 +28,7 @@
       "name": "quick-clipboard-to-tana",
       "title": "Quick Clipboard to Tana",
       "subtitle": "Tana",
-      "description": "Instantly convert clipboard content to Tana Paste format",
+      "description": "Instantly convert clipboard content to Tana Paste format (includes YouTube transcript cleaning)",
       "mode": "no-view"
     },
     {
