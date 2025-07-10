@@ -24,6 +24,8 @@ type ExtensionPreferences = {
   "transcriptField": string,
   /** Content Field Name - Field name for main content */
   "contentField": string,
+  /** Video ID Field Name - Field name for YouTube video ID */
+  "videoIdField": string,
   /** Include Author Field - Whether to include author/creator information in output */
   "includeAuthor": boolean,
   /** Include Description Field - Whether to include description information in output */
