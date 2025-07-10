@@ -899,6 +899,7 @@ export default async function Command() {
           : undefined,
       author: videoInfo.channelName,
       duration: videoInfo.duration,
+      videoId: videoInfo.videoId,
       content: transcriptContent,
       videoTag: preferences.videoTag,
       articleTag: preferences.articleTag,
@@ -907,6 +908,7 @@ export default async function Command() {
       authorField: preferences.authorField,
       transcriptField: preferences.transcriptField,
       contentField: preferences.contentField,
+      videoIdField: preferences.videoIdField,
       includeAuthor: preferences.includeAuthor,
       includeDescription: preferences.includeDescription,
     });

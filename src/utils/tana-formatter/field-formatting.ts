@@ -24,8 +24,10 @@ export function formatMetadataFields(options: {
   description?: string;
   author?: string;
   duration?: string;
+  videoId?: string;
   urlField?: string;
   authorField?: string;
+  videoIdField?: string;
   includeAuthor?: boolean;
   includeDescription?: boolean;
 }): string[] {
@@ -51,6 +53,14 @@ export function formatMetadataFields(options: {
 
   if (options.duration) {
     fields.push(`  - Duration::${options.duration}`);
+  }
+
+  if (options.videoId) {
+    // Sanitize field name by trimming whitespace and removing trailing colons
+    const videoIdFieldName = (options.videoIdField || "videoID")
+      .trim()
+      .replace(/:+$/, "");
+    fields.push(`  - ${videoIdFieldName}::${options.videoId}`);
   }
 
   if (options.description && options.includeDescription !== false) {

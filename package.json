@@ -134,6 +134,15 @@
       "placeholder": "Content"
     },
     {
+      "name": "videoIdField",
+      "type": "textfield",
+      "required": false,
+      "title": "Video ID Field Name",
+      "description": "Field name for YouTube video ID",
+      "default": "videoID",
+      "placeholder": "videoID"
+    },
+    {
       "name": "includeAuthor",
       "type": "checkbox",
       "required": false,

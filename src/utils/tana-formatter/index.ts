@@ -37,6 +37,7 @@ export interface TanaFormatOptions {
   content?: string;
   lines?: string[];
   duration?: string;
+  videoId?: string;
   useSwipeTag?: boolean;
   transcriptAsFields?: boolean; // Whether to format transcripts as fields vs sibling nodes
   // User preference values
@@ -48,6 +49,7 @@ export interface TanaFormatOptions {
   authorField?: string;
   transcriptField?: string;
   contentField?: string;
+  videoIdField?: string;
   includeAuthor?: boolean;
   includeDescription?: boolean;
 }
@@ -157,9 +159,11 @@ function formatYouTubeVideoContent(options: TanaFormatOptions): string {
         channelUrl: options.channelUrl,
         author: options.author,
         duration: options.duration,
+        videoId: options.videoId,
         description: options.description,
         urlField: options.urlField,
         authorField: options.authorField,
+        videoIdField: options.videoIdField,
         includeAuthor: options.includeAuthor,
         includeDescription: options.includeDescription,
       }),
