@@ -318,7 +318,7 @@ function formatSelectedTextContent(options: TanaFormatOptions): string {
  * Format manually pasted YouTube transcript for Tana
  *
  * Cleans raw YouTube transcript by removing timestamps and formatting
- * into 5000 character chunks suitable for Tana paste format.
+ * into 7000 character chunks suitable for Tana paste format.
  *
  * @param options - Formatting options containing raw transcript with timestamps
  * @returns Formatted Tana Paste string with cleaned, chunked transcript
@@ -332,8 +332,8 @@ function formatManualYouTubeTranscript(options: TanaFormatOptions): string {
   // Clean the transcript by removing timestamps
   const cleanedTranscript = cleanYouTubeTranscript(rawContent);
 
-  // Chunk into 5000 character blocks as requested
-  const chunks = processAndChunkTranscript(cleanedTranscript, 5000);
+  // Chunk into 7000 character blocks to align with default chunk size
+  const chunks = processAndChunkTranscript(cleanedTranscript, 7000);
 
   if (chunks.length > 0) {
     // Apply transcript tag if provided
