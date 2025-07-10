@@ -1,6 +1,15 @@
 # Tana Tools for Raycast Changelog
 
-## [1.0.0] - {PR_MERGE_DATE}
+## [YouTube Transcript Parser & Video ID Field] - {PR_MERGE_DATE}
+
+### 🎥 YouTube Enhancements
+- Added videoID field to YouTube command for better video tracking and organization
+- Introduced manual YouTube transcript parsing capability for cases when automatic extraction fails
+- Increased transcript chunk size from 5000 to 7000 characters for more complete content blocks
+
+### 🐛 Fixes
+- Fixed YouTube transcript chunking to better handle longer videos
+- Improved reliability of transcript extraction
 
 ### 🎉 Initial Release
 

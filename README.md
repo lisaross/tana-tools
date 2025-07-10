@@ -38,7 +38,7 @@ Transform any content into Tana's structured format with just a few keystrokes. 
 - **Copy Page Content to Tana (Select Tab)** - Choose from any open browser tab
 
 ### 🎥 YouTube Integration
-- **YouTube to Tana** - Extract video metadata, descriptions, and full transcripts (note: you'll need to open the Transcript on the Youtube page first 😭)
+- **YouTube to Tana** - Extract video metadata, descriptions, full transcripts, and video ID for better organization (note: you'll need to open the Transcript on the Youtube page first 😭)
 
 ## 🎨 Customization
 
@@ -130,6 +130,20 @@ Transform any content into Tana's structured format with just a few keystrokes. 
       - Reward reinforces the habit
 ```
 
+**YouTube Output Example:**
+```
+%%tana%%
+- How to Learn Anything #video
+  - URL::https://youtube.com/watch?v=abc123
+  - Author::Learning Channel
+  - VideoID::abc123
+  - Description::Master the art of learning
+  - Transcript::
+    - [00:00] Welcome to today's episode
+    - [00:15] Today we'll explore learning techniques
+    - [00:30] First, let's understand how the brain works
+```
+
 **For Limitless Transcripts:**
 Just copy your transcript to clipboard and run "Quick Clipboard to Tana" - it automatically detects and formats transcripts with smart chunking!
 
@@ -138,7 +152,8 @@ Just copy your transcript to clipboard and run "Quick Clipboard to Tana" - it au
 ✅ **Smart Content Detection** - Automatically handles different content types  
 ✅ **Clean Formatting** - Removes ads, navigation, and clutter  
 ✅ **Rich Metadata** - Captures titles, authors, descriptions, URLs  
-✅ **Transcript Processing** - Smart chunking with proper boundaries  
+✅ **Transcript Processing** - Smart chunking (7000 chars) with proper boundaries
+✅ **Video ID Tracking** - Captures YouTube video IDs for better organization  
 ✅ **Table Support** - Converts HTML tables to markdown format  
 ✅ **Link Preservation** - Maintains clickable links in content  
 ✅ **Auto Tana Opening** - Seamlessly opens Tana after conversion  
@@ -147,6 +162,7 @@ Just copy your transcript to clipboard and run "Quick Clipboard to Tana" - it au
 ## 💡 Pro Tips
 
 - **For YouTube**: Always click "Show transcript" below the video first for best results
+- **Manual Transcript**: If automatic extraction fails, you can copy and paste YouTube transcripts manually
 - **For Limitless**: Just copy your transcript text and use "Quick Clipboard to Tana"
 - **Customization**: Check Raycast preferences to personalize tags and field names
 - **Safari Users**: Enable developer features in Safari settings for web content extraction
