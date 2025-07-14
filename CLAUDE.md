@@ -22,6 +22,7 @@ ray lint
 npm run safe-publish
 
 # Or direct publish without exclusions
+# ⚠️ WARNING: This bypasses AI-file stripping – use only for quick internal tests
 npm run ray-publish
 ```
 
