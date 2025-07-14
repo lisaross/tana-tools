@@ -591,3 +591,99 @@ export function removeColonsInContent(content: string): string {
     })
     .join("\n");
 }
+
+/**
+ * Format an array of lines into Tana's hierarchical structure
+ *
+ * Converts plain text lines into Tana's bullet format while intelligently
+ * handling markdown headers and Tana tags. Preserves markdown header syntax
+ * while escaping actual Tana tags to prevent unwanted tag creation.
+ *
+ * @param lines - Array of text lines to format
+ * @returns Array of formatted lines with Tana bullet structure
+ */
+export function formatLinesAsHierarchy(lines: string[]): string[] {
+  if (!lines || lines.length === 0) {
+    return [];
+  }
+
+  interface ProcessedLine {
+    content: string;
+    level: number;
+    isListItem: boolean;
+  }
+
+  // Process lines to determine their hierarchy level and content
+  const processedLines: ProcessedLine[] = [];
+  let currentHeaderLevel = 0;
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+
+    // Skip empty lines and bullet-only lines
+    if (!trimmed || trimmed === "-" || trimmed === "•" || trimmed === "*") {
+      return;
+    }
+
+    // Check for markdown headers
+    const headerMatch = trimmed.match(/^(#{1,6}) (.+)$/);
+    if (headerMatch) {
+      const headerLevel = headerMatch[1].length;
+      const headerContent = headerMatch[2];
+
+      // Escape any Tana tags in the header content
+      const escapedContent = headerContent.replace(
+        /(#(?:\w+|\[\[.*?\]\]))/g,
+        "\\$1",
+      );
+
+      currentHeaderLevel = headerLevel;
+      processedLines.push({
+        content: escapedContent,
+        level: headerLevel - 1, // Convert to 0-based
+        isListItem: false,
+      });
+    } else if (
+      trimmed.startsWith("- ") ||
+      trimmed.startsWith("* ") ||
+      trimmed.startsWith("• ")
+    ) {
+      // It's a list item
+      const listContent = trimmed.substring(2).trim();
+      const escapedContent = listContent.replace(/#/g, "\\#");
+
+      processedLines.push({
+        content: escapedContent,
+        level: currentHeaderLevel, // List items go under current header
+        isListItem: true,
+      });
+    } else {
+      // Regular text line
+      const escapedContent = trimmed.replace(/#/g, "\\#");
+
+      processedLines.push({
+        content: escapedContent,
+        level: currentHeaderLevel, // Regular lines go under current header
+        isListItem: true,
+      });
+    }
+  });
+
+  // Build the result with proper indentation
+  const result: string[] = [];
+
+  if (processedLines.length === 0) {
+    return result;
+  }
+
+  // Find the minimum level to normalize
+  const minLevel = Math.min(...processedLines.map((line) => line.level));
+
+  processedLines.forEach((line) => {
+    const indentLevel = line.level - minLevel;
+    const indent = "  ".repeat(indentLevel);
+    result.push(`${indent}- ${line.content}`);
+  });
+
+  return result;
+}

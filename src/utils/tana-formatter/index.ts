@@ -10,6 +10,7 @@ import {
   processYouTubeTranscript,
   processAndChunkTranscript,
   removeColonsInContent,
+  formatLinesAsHierarchy,
 } from "./content-processing";
 import { cleanYouTubeTranscript } from "./youtube-transcript-cleaner";
 import {
@@ -18,7 +19,6 @@ import {
   formatTranscriptChunks,
   formatTranscriptField,
   formatTranscriptFieldWithSiblings,
-  formatLinesAsHierarchy,
   formatTitleLine,
 } from "./field-formatting";
 

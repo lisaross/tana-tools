@@ -64,6 +64,53 @@ npm run ray-publish
 
 5. **User Preferences**: The extension reads user preferences for custom tags and field names - always use the preference values, not hardcoded strings
 
+## Tana Paste Format Requirements
+
+### Core Format Rules
+1. **Header**: All Tana paste content must start with `%%tana%%`
+2. **Nodes**: Each node starts with `- ` (dash followed by space)
+3. **Indentation**: Use 2 spaces for each level of hierarchy
+4. **No double bullets**: Never use `- -` or multiple bullets on the same line
+
+### Markdown to Tana Conversion
+1. **Headers**: Convert markdown headers to plain text nodes
+   - `## Header` becomes `- Header` (remove all `#` symbols)
+   - Header hierarchy is preserved through indentation levels
+   - H1 = no indent, H2 = 2 spaces, H3 = 4 spaces, etc.
+
+2. **List Items**: Preserve existing list bullets
+   - `- Item` stays as `- Item`
+   - But nested under appropriate header level
+
+3. **Tag Escaping**: 
+   - Escape Tana tags: `#tag` becomes `\#tag`
+   - Escape complex tags: `#[[complex tag]]` becomes `\#[[complex tag]]`
+   - Don't escape markdown headers (they're converted to plain text)
+
+### Example Conversion
+```markdown
+## Main Topic
+### Subtopic
+- Point one
+- Point two
+Text with #tag
+```
+
+Becomes:
+```
+%%tana%%
+- Main Topic
+  - Subtopic
+    - Point one
+    - Point two
+    - Text with \#tag
+```
+
+### Important Notes
+- Each line must have exactly one `- ` prefix at the appropriate indentation level
+- Content hierarchy is shown through indentation, not through special formatting
+- All non-header hash symbols must be escaped to prevent unwanted tag creation
+
 ## Code Standards
 
 - TypeScript strict mode enabled
