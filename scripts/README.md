@@ -20,7 +20,7 @@ npm run safe-publish
 
 ### How it works
 
-1. Before publishing, the script moves AI-related files to a temporary directory (`.ai-files-temp/`)
+1. Before publishing, the script moves AI-related files to a system temporary directory
 2. Runs `ray publish`
 3. Automatically restores the files after publishing (even if interrupted)
 

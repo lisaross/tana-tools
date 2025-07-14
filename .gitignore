@@ -40,6 +40,3 @@ ehthumbs_vista.db
 !.vscode/extensions.json
 !.vscode/settings.json
 *.code-workspace
-
-# Temporary directory for AI files during publishing
-.ai-files-temp/

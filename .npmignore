@@ -29,3 +29,4 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+.ai-files-temp/

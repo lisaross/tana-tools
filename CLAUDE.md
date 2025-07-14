@@ -18,8 +18,11 @@ ray build -e dist
 # Run linting
 ray lint
 
-# Publish to Raycast store
-ray publish
+# Publish to Raycast store (excludes AI files)
+npm run safe-publish
+
+# Or direct publish without exclusions
+npm run ray-publish
 ```
 
 ## Architecture

@@ -2,15 +2,17 @@
 
 # Script to temporarily move AI-related files during Raycast publishing
 
-TEMP_DIR=".ai-files-temp"
+# Defensive shell options
+set -euo pipefail
+
+# Use system temp directory
+TEMP_DIR=$(mktemp -d -t raycast-publish-XXXXXX)
 FILES_TO_MOVE=("CLAUDE.md" ".claude" ".cursorrules" ".cursor" ".github/copilot-instructions.md")
 
 # Function to move files to temp directory
 move_files() {
     echo "📦 Preparing for Raycast publish..."
-    
-    # Create temp directory
-    mkdir -p "$TEMP_DIR"
+    echo "📁 Using temp directory: $TEMP_DIR"
     
     # Move AI-related files
     for file in "${FILES_TO_MOVE[@]}"; do
@@ -21,7 +23,7 @@ move_files() {
             if [ "$parent_dir" != "." ]; then
                 mkdir -p "$TEMP_DIR/$parent_dir"
             fi
-            mv "$file" "$TEMP_DIR/$file" 2>/dev/null
+            mv "$file" "$TEMP_DIR/$file"
         fi
     done
     
@@ -37,7 +39,7 @@ restore_files() {
         for file in "${FILES_TO_MOVE[@]}"; do
             if [ -e "$TEMP_DIR/$file" ]; then
                 echo "Restoring $file..."
-                mv "$TEMP_DIR/$file" "$file" 2>/dev/null
+                mv "$TEMP_DIR/$file" "$file"
             fi
         done
         
@@ -47,19 +49,32 @@ restore_files() {
     fi
 }
 
+# Variable to track if we should restore files
+SHOULD_RESTORE=0
+
+# Function to handle cleanup
+cleanup() {
+    if [ $SHOULD_RESTORE -eq 1 ]; then
+        restore_files
+    fi
+}
+
 # Trap to ensure files are restored even if script is interrupted
-trap restore_files EXIT
+trap cleanup EXIT
 
 # Main execution
 case "$1" in
     "pre")
         move_files
+        SHOULD_RESTORE=1
         ;;
     "post")
+        SHOULD_RESTORE=1
         restore_files
         ;;
     "publish")
         move_files
+        SHOULD_RESTORE=1
         echo "🚀 Running ray publish..."
         ray publish
         # Files will be restored by trap on exit
