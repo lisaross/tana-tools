@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Script to temporarily move AI-related files during Raycast publishing
 

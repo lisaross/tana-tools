@@ -168,6 +168,7 @@ try {
 - Keep CHANGELOG.md up to date
 
 ### Publishing Preparation
+- Use the provided `npm run safe-publish` script (powered by `scripts/publish-helper.sh`) instead of invoking `ray publish` directly. This temporarily removes AI-related files such as `CLAUDE.md` before packing the extension.
 - Ensure all assets are optimized (icons should be 512x512 PNG)
 - Review package.json manifest for accuracy
 - Test on a clean Raycast installation
